@@ -1,20 +1,22 @@
 package com.mongo.cn.demo.service;
 
 import com.mongo.cn.demo.bean.User;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.UpdateResult;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 
-@Component
+
 public interface UserService {
     int saveUser(User user);
 
     User getUser(Long id);
 
-    int update(User user);
+    UpdateResult update(User user);
 
     List<User> findUsers(String userName, String note, Integer skip, Integer limit);
 
-    int deleteUser(Long id);
+    DeleteResult deleteUser(Long id);
 }
