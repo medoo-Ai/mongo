@@ -1,7 +1,9 @@
 package com.mongo.cn.demo.controller;
 
 import com.mongo.cn.demo.bean.User;
+import com.mongo.cn.demo.repository.UserRepositories;
 import com.mongo.cn.demo.service.UserService;
+import com.mongodb.client.result.DeleteResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +22,27 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+
+    @Autowired
+    private UserRepositories userRepositories;
+
+
+    @RequestMapping("saveUser")
+    public User findUser(Long uid, String userName){
+        return userRepositories.findUser(uid,userName);
+    }
+
+    @RequestMapping("findUsersByName")
+    public List<User> findUsersByName(String userName) {
+        return userRepositories.findUsersByNameLike(userName);
+    }
+
+
+
+
+
+
 
     @RequestMapping("save")
     public User saveUser(User user){
@@ -46,7 +69,7 @@ public class UserController {
     }
 
     @RequestMapping("delete")
-    public int deleteUser(Long id) {
+    public DeleteResult deleteUser(Long id) {
         return userService.deleteUser(id);
     }
 
